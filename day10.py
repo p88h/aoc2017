@@ -1,10 +1,6 @@
 import io
-line = io.open("day10.in").readline()
-len1 = list(map(int, line.split(',')))
-len2 = list(map(ord, line))
-len2.extend([17, 31, 73, 47, 23])
 
-def knothash(lens, rounds):
+def knotrun(lens, rounds):
     tab = list(range(256))
     p = 0
     s = 0
@@ -18,15 +14,26 @@ def knothash(lens, rounds):
             s += 1
     return tab
 
-t1 = knothash(len1, 1)
-print(t1[0]*t1[1])
-t2 = knothash(len2, 64)
-d2 = ''
-o = 0
-for b in range(16):
-    v = 0
-    for c in range(16):
-        v ^= t2[o+c]
-    o += 16
-    d2 += "{:02x}".format(v)
-print(d2)   
+def simpleknot(line):
+    len1 = list(map(int, line.split(',')))
+    t1 = knotrun(len1, 1)
+    return t1[0]*t1[1]
+
+def knothash(line):
+    len2 = list(map(ord, line))
+    len2.extend([17, 31, 73, 47, 23])
+    t2 = knotrun(len2, 64)
+    d2 = ''
+    o = 0
+    for b in range(16):
+        v = 0
+        for c in range(16):
+            v ^= t2[o+c]
+        o += 16
+        d2 += "{:02x}".format(v)
+    return d2
+
+if __name__ == '__main__':
+    l = io.open("day10.in").readline()
+    print(simpleknot(l))
+    print(knothash(l))
