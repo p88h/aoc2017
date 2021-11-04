@@ -22,7 +22,7 @@ class coproc:
     def step(self, other):
         op = self.prog[self.pc]
         self.cnt += 1
-        if self.cnt % 1000000 == 0:
+        if self.cnt % 1000 == 0:
             print("{}: regs={}".format(self.pc, self.reg))
         if op[0] == 'set':
             self.reg[op[1]]=self.val(op[2])

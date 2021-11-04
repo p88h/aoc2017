@@ -9,16 +9,11 @@ while True:
     f=1
     d=2
     while True:
-        e = b // d
-        while True:
-            if d * e == b:
-                f = 0
-                break
-            e += 1 
-            if d * e > b:
-                break
+        if b % d == 0:
+            f = 0
+            break
         d += 1
-        if d * d > b or f == 0:
+        if d * d > b:
             break
     if f == 0:
         h += 1
